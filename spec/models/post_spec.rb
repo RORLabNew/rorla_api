@@ -27,6 +27,7 @@ describe Post do
       expect(build(:post)).to validate_presence_of :content
     end
     it "> Post 생성시 hit는 0이다."
+    it "> 1개의 User를 가지고 있다."
   end
   describe "> 관계선언 검증" do
     it "> 4개의 Comment를 가지고 있다."
