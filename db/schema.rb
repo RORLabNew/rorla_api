@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318035342) do
+ActiveRecord::Schema.define(version: 20140319041145) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -82,6 +82,18 @@ ActiveRecord::Schema.define(version: 20140318035342) do
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+
+  create_table "scraps", force: true do |t|
+    t.string   "title",                      null: false
+    t.text     "description"
+    t.string   "url",                        null: false
+    t.boolean  "shared",      default: true
+    t.integer  "scraper_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scraps", ["scraper_id"], name: "index_scraps_on_scraper_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

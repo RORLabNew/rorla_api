@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :auth_tokens, dependent: :destroy
 
   has_many :posts, foreign_key: :writer_id, dependent: :destroy
+  has_many :scraps, foreign_key: :scraper_id, dependent: :destroy
   has_many :questions, dependent: :destroy
 
 end

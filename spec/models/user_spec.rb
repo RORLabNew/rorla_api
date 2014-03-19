@@ -29,7 +29,7 @@ describe User do
       user = build(:user, password: "password")
       expect(user).to be_valid
     end
-      
+
     it "> 대소문자 구별없이 이메일이 같은 경우 유효하지 않다 " do
       create(:user, email: 'tester@example.com')
       tester = build(:user, email: 'Tester@example.com')
@@ -37,12 +37,12 @@ describe User do
     end
 
     it "> 비밀번호 길이가 8자리보다 짧을경우 유효하지 않다." do
-      user = build(:user, password: "1234567")      
+      user = build(:user, password: "1234567")
       expect(user).to_not be_valid
     end
 
     it "> 비밀번호 길이가 128자리보다 길경우 유효하지 않다." do
-      user = build(:user, password: '1'*129)            
+      user = build(:user, password: '1'*129)
       expect(user).to_not be_valid
     end
 
@@ -64,10 +64,21 @@ describe User do
       user = build(:user, email: nil)
       expect(user).to_not be_valid
     end
-    
+
     it "> password가 없으면 유효하지 않다." do
-      user = build(:user, password: nil)      
+      user = build(:user, password: nil)
       expect(user).to_not be_valid
+    end
+  end
+  describe "> 관계선언 검증" do
+    it "has_many :scraps, dependent: :destroy" do
+      expect(create(:user)).to have_many(:scraps).dependent(:destroy)
+    end
+    it "has_many :posts, dependent: :destroy" do
+      expect(create(:user)).to have_many(:posts).dependent(:destroy)
+    end
+    it "has_many :questions, dependent: :destroy" do
+      expect(create(:user)).to have_many(:questions).dependent(:destroy)
     end
   end
 end
