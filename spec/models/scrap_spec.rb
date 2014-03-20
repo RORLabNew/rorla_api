@@ -38,10 +38,14 @@ describe Scrap do
     end
   end
   describe "스코프 및 클래스 메소드 검증" do
-    it "내가 작성한 scrap 목록" do
+    it "내가 작성한 scrap 목록을 보여 준다." do
       user = create(:user)
       scraps = create_list(:scrap, 5, scraper: user)
       expect(Scrap.myscraps(user).size).to eq 5
+    end
+    it "공유한 scrap 목록만 보여 준다." do
+      scraps = create_list(:scrap, 5)
+      expect(Scrap.shared.size).to eq 5
     end
   end
   describe "인스턴스 메소드 검증"

@@ -18,6 +18,9 @@ class Scrap < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
 
+  scope :shared, -> { where(shared: true) }
+  scope :not_shared, -> { where(shared: false) }
+
   def self.myscraps(user)
     Scrap.where( scraper: user)
   end
